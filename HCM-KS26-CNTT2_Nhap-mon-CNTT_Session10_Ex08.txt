@@ -1,0 +1,14 @@
+Bài 8: Chữa Lỗi Bảng Đăng Ký Báo Cáo Viên Không Lọc Được
+Phần 1: Phân tích lỗi
+lỗi 1: vi phạm nguyên tắc 4 có hàng trống ở giữa data do chèn tổng 
+Hậu quả: dòng tổng kết làm ngắt quãng mạch dữ liệu của bảng làm AutoFilter đưa kết quả sai
+lỗi 2: vi phạm nguyên tắc 5 chèn tổng trong bảng data
+Hậu quả: dòng tổng kết làm ngắt quãng mạch dữ liệu của bảng làm AutoFilter đưa kết quả sai
+lỗi 3: vi phạm nguyên tắc 1 hàng đầu tiên bị merge là DANH SÁCH BÁO CÁO VIÊN - HỘI NGHỊ KHKH 2026 ở tiêu đề đầu tiên
+hậu quả:dù nhìn B,C,D,E trống nhưng có thể khiến Google Sheets nhận diện nhầm hàng 1 là tiêu đề thay vì hàng 2 sẽ làm mất filter 
+lỗi 4: Dữ liệu chứa khoảng trắng thừa vô hình là dữ liệu "Trần Thị Bình " khiến Filter không khớp kết quả với "Trần Thị Bình"
+hậu quả: lọc bị lỗi
+
+Lý do khiến Filter không khớp kết quả với "Trần Thị Bình" do bộ lọc dữ liệu (AutoFilter) của bảng tính hoạt động dựa trên việc đối chiếu từng byte ký tự (mã ASCII) của chuỗi như ví dụ:
+-Chuỗi Trần Thị Bình gồm các ký tự chữ cái và khoảng trắng ngắt từ bình thường.
+-Chuỗi Trần Thị Bình  có đính kèm thêm các ký tự khoảng trắng (Space, mã ASCII 32) ở cuối chuỗi.
